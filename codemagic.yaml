@@ -1,0 +1,14 @@
+workflows:
+  ios-testing-workflow:
+    name: Testing Workflow
+    instance_type: mac_mini_m1
+    scripts:
+      - name: Run tests
+        script: |
+          xcode-project run-tests \
+            --project Sample.xcodeproj \
+            --scheme Sample \
+            --device "iPhone 13"
+        test_report: build/ios/test/*.xml
+    artifacts:
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Logs/Test/**/*.xcresult
